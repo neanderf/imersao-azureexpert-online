@@ -232,7 +232,56 @@ Hands-on Lab
 
 1. Explore properties to Virtual machines.
 
-## Lab #04 - Azure Storage Blobs (20 minutes)
+## Lab #04 - Configure Azure DNS for internal name resolution (15 minutes)
+
+1. In the Azure portal, search for and select **Private DNS zones** and, on the **Private DNS zones** blade, click **+ Add**.
+
+1. Create a private DNS zone with the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | --- | --- |
+    | Subscription | the name of the Azure subscription you are using in this lab |
+    | Resource Group | **RG-TAE-Networks** |
+    | Name | **azureexpert.corp** |
+
+1. Click Review and Create. Let validation occur, and hit Create again to submit your deployment.
+
+    >**Note**: Wait for the private DNS zone to be created. This should take about 2 minutes.
+
+1. Click **Go to resource** to open the **azureexpert.corp** DNS private zone blade.
+
+1. On the **azureexpert.corp** private DNS zone blade, in the **Settings** section, click **Virtual network links**
+
+1. Click **+ Add** to create a virtual network link with the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | --- | --- |
+    | Link name | **VNL-Hub** |
+    | Subscription | the name of the Azure subscription you are using in this lab |
+    | Virtual network | **VNET-TAE-Hub** |
+    | Enable auto registration | enabled |
+
+1. Click **OK**.
+
+    >**Note:** Wait for the virtual network link to be created. This should take less than 1 minute.
+
+1. On the **azureexpert.corp** private DNS zone blade, in the sidebar, click **Overview**
+
+1. Verify that the DNS records for **VMHUB01** appear in the list of record sets as **Auto registered**.
+
+    >**Note:** You might need to wait a few minutes and refresh the page if the record sets are not listed.
+
+1. Switch to the RDP session to **VMHUB01**.
+
+1. In the Terminal console, run the following to test internal name resolution of the **az104-04-vm1** DNS record set in the newly created private DNS zone:
+
+   ```powershell
+   nslookup vmhub01.azureexpert.corp
+   ```
+
+1. Verify that the output of the command includes the private IP address of **VMHub01**.
+
+## Lab #05 - Azure Storage Blobs (20 minutes)
 
 1. In the Azure portal, search for and select **Storage accounts** and, on the **Storage accounts** blade, select **+ Add**.
 
@@ -307,7 +356,7 @@ Hands-on Lab
 
 1. Leave the Azure Storage Explorer window open.
 
-## Lab #05 - Azure Files (15 minutes)
+## Lab #06 - Azure Files (15 minutes)
 
 1. In the Azure portal, search for and select **Storage accounts** and, on the **Storage accounts** blade and create a new Storage account **sataefiles**, in the **File service** section, click **File shares**.
 
@@ -331,7 +380,7 @@ Hands-on Lab
 
 1. Connect share and upload files.
 
-## Lab #06 - Azure VNET Peering (30 minutes)
+## Lab #07 - Azure VNET Peering (30 minutes)
 
 1. In the Azure portal, search for and select **Virtual networks**, and, on the **Virtual networks** blade, click **+ Add**.
 
@@ -504,6 +553,7 @@ Implement a Hub-spoke topology
 - VNET Peering connection in each spokes to use remote gateways;
 - VNET Peering connections to allow forwarded;
 - Azure Firewall on the Hub network;
+-- Azure Bastion on the Hub network;
 - Custom Route tables to address prefix "0.0.0.0" and next hop type to virtual applicance **IP Azure Firewall**;
 - Network rule Azure Firewall all traffic;
 - DNAT rules Azure Firewall to destination ports RDP (3389).
@@ -514,7 +564,7 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
 
 ## Day 2
 
-## Lab #01 - Azure Load Balancer (30 minutes)
+## Lab #08 - Azure Load Balancer (30 minutes)
 
 1. Sign in to the [Azure portal](http://portal.azure.com).
 
@@ -525,7 +575,7 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
     | Setting | Value | 
     | --- | --- |
     | Subscription | the name of the Azure subscription you will be using in this lab |
-    | Resource group | the name of a new resource group **RGNAME-VMSM** |
+    | Resource group | the name of a new resource group **RG-TAE-VMS** |
     | Virtual machine name | **VMWEB01** and **VMWEB02** |
     | Region | select one of the regions that support availability zones and where you can provision Azure virtual machines | 
     | Availability options | **Availability zone** |
@@ -565,13 +615,13 @@ Test open Browser to IP Address the Virtual machines.
     | Setting | Value |
     | --- | --- |
     | Subscription | the name of the Azure subscription you are using in this lab |
-    | Resource group | the name of a new resource group **RGNAME-NETWORK** |
-    | Name | **ALBNAME** |
+    | Resource group | the name of a new resource group **RG-TAE-Networks** |
+    | Name | **ALB-TAE-PS01** |
     | Region| name of the Azure region into which you deployed all other resources in this lab |
     | Type | **Public** |
     | SKU | **Standard** |
     | Public IP address | **Create new** |
-    | Public IP address name | **ALBNAME-PI** |
+    | Public IP address name | **ALB-TAE-PS-PI** |
     | Availability zone | **Zone-redundant** |
     | Add a public IPv6 address | **No** |
 
@@ -586,7 +636,7 @@ Test open Browser to IP Address the Virtual machines.
     | Setting | Value |
     | --- | --- |
     | Name | **BP-WEB** |
-    | Virtual network | **VNETNAME** |
+    | Virtual network | **VNET-TAE-HUB** |
     | IP version | **IPv4** |
     | Virtual machine | **VMWEB01** | 
     | Virtual machine IP address | associate IP address |
