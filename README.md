@@ -1,4 +1,4 @@
-# Imersao Azure Expert 2.0
+# Imersao Azure Expert Online
 
 Hands-on Lab
 
@@ -107,7 +107,7 @@ Hands-on Lab
     |Setting|Value|
     |---|---|
     |Subscription| the name of the Azure subscription you will use in this lab |
-    |Resource Group| **RGNAME-VMS**|
+    |Resource Group| **RG-TAE-VMs**|
     |Region| East US 2 |
     |Tags| environment: resource, project: azureexpert |
     | | |
@@ -127,8 +127,8 @@ Hands-on Lab
     | Setting | Value |
     | --- | --- |
     | Subscription | the name of the Azure subscription you will be using in this lab |
-    | Resource Group | the name of a resource group **RGNAME-NETWORK** |
-    | Name | **VNETNAME-HUB** |
+    | Resource Group | the name of a resource group **RG-TAE-Networks** |
+    | Name | **VNET-TAE-Hub** |
     | Region | the name of any Azure region available in the subscription you will use in this lab |
     | IPv4 address space | **10.1.0.0/16** |
     | Subnet name | **Default** |
@@ -160,8 +160,8 @@ Hands-on Lab
     | Setting | Value | 
     | --- | --- |
     | Subscription | the name of the Azure subscription you will be using in this lab |
-    | Resource group | the name of a new resource group **RGNAME-VMS** |
-    | Virtual machine name | **VMNAME01** |
+    | Resource group | the name of a new resource group **RG-TAE-VMs** |
+    | Virtual machine name | **VMHUB01** |
     | Region | select same region the Resouce group | 
     | Availability options | **Availability sets** |
     | Availability set | **AS-VM** |
@@ -185,9 +185,9 @@ Hands-on Lab
 
     | Setting | Value | 
     | --- | --- |
-    | Virtual Network | **VNETNAME** |
+    | Virtual Network | **VNET-TAE-HUB** |
     | Subnet | **FrontEnd** |
-    | Public IP | **VMNAME01-PI** |
+    | Public IP | **VMHUB01-PI** |
     | NIC network security group | **Basic** |
     | Accelerated networking | **Off** |
 	| Inbound Ports | **RDP (3389)** and HTTP (80)|
@@ -200,7 +200,7 @@ Hands-on Lab
     | --- | --- |
     | Boot diagnostics | **Enable with custom storage account** |
     | Diagnostics storage account | create new |
-    | Properties storage account | Name: saflndiag, Account kind: StorageV2, Performance: Standard, Replication: Locally-redundant-storage (LRS) |
+    | Properties storage account | Name: **sataediag###**, Account kind: StorageV2, Performance: Standard, Replication: Locally-redundant-storage (LRS) |
     | Enable auto-shutdown | off    
     
 1. Click **Next: Advanced >**, on the **Advanced** tab of the **Create a virtual machine** blade, review the available settings without modifying any of them, and click **Review + Create**.
@@ -215,9 +215,9 @@ Hands-on Lab
 
     | Setting | Value | 
     | --- | --- |
-    | Disk name | **VMNAME01-DataDisk01** |
+    | Disk name | **VMHUB01-DataDisk01** |
     | Source type | **None** |
-    | Account type | **Premium SSD** |
+    | Account type | **Standard HD** |
     | Size | **50 GiB** |
     | | |
 
@@ -241,8 +241,8 @@ Hands-on Lab
     | Setting | Value | 
     | --- | --- |
     | Subscription | the name of the Azure subscription you are using in this lab |
-    | Resource group | the name of a new resource group **storageaccountname01** |
-    | Storage account name | any globally unique name between 3 and 24 in length consisting of letters and digits |
+    | Resource group | the name of a new resource group **RG-TAE-Storage** |
+    | Storage account name | any globally unique name between 3 and 24 in length consisting of letters and digits **sataeblob###** |
     | Location | the name of an Azure region where you can create an Azure Storage account  |
     | Performance | **Standard** |
     | Account kind | **StorageV2 (general purpose v2)** |
@@ -256,11 +256,11 @@ Hands-on Lab
 
 1. On the Storage account blade, in the Blob service section, click Containers.
 
-1. Select **Create Blob Container**, and use the empty text box to set the container name to **container1**.
+1. Select **Create Blob Container**, and use the empty text box to set the container name to **azureexpert**.
 
-1. Select **container1**, in the **container1** pane, select **Upload**, and in the drop-down list, select **Upload Files**.
+1. Select **azureexpert**, in the **azureexpert** pane, select **Upload**, and in the drop-down list, select **Upload Files**.
 
-1. In the **Upload Files** window, select the ellipsis button next to the **Selected files** label, in the **Choose files to upload** window, select **files**, and select **Open**.
+1. In the **Upload Files** window, select the ellipsis button next to the **Selected files** label, in the **Choose files to upload** window, select **files** select random files your computer, and select **Open**.
 
 1. Back in the **Upload Files** window, select **Upload**
 
@@ -297,7 +297,7 @@ Hands-on Lab
 
 1. In the Azure Storage Explorer window, in the **Connect to Azure Storage** window, select **Use a shared access signature (SAS) URI** and select **Next**.
 
-1. In the **Attach with SAS URI** window, in the **Display name** text box, type **storageaccountname01**, in the **URI** text box, paste the value you copied into Clipboard, and select **Next**. 
+1. In the **Attach with SAS URI** window, in the **Display name** text box, type **sataeblob###**, in the **URI** text box, paste the value you copied into Clipboard, and select **Next**. 
 
     >**Note**: This should automatically populate the value of **Blob endpoint** text box.
 
@@ -309,7 +309,7 @@ Hands-on Lab
 
 ## Lab #05 - Azure Files (15 minutes)
 
-1. In the Azure portal, navigate back to the blade of the storage account you created in the first task of this lab and, in the **File service** section, click **File shares**.
+1. In the Azure portal, search for and select **Storage accounts** and, on the **Storage accounts** blade and create a new Storage account **sataefiles**, in the **File service** section, click **File shares**.
 
 1. Click **+ File share** and create a file share with the following settings:
 
@@ -340,8 +340,8 @@ Hands-on Lab
     | Setting | Value |
     | --- | --- |
     | Subscription | the name of the Azure subscription you will be using in this lab |
-    | Resource Group | the name of a resource group **RGNAME-SPOKE1** |
-    | Name | **VNETNAME-SPOKE1** |
+    | Resource Group | the name of a resource group **RG-TAE-Spoke1** |
+    | Name | **VNET-TAE-Spoke1** |
     | Region | west us 2 |
     | IPv4 address space | **10.10.0.0/16** |
     | Subnet name | **Default** |
@@ -354,13 +354,13 @@ Hands-on Lab
 
 1. In the Azure portal, search for and select **Virtual machines**
 
-1. On the **Virtual machines**, click **Add** and create a new Virtual machine, on the **VMNAMESPOKE1**.
+1. On the **Virtual machines**, click **Add** and create a new Virtual machine, on the **VMSPOKE01**.
 
 1. In the Azure portal, search for and select **Virtual networks**.
 
-1. In the list of virtual networks, click **VNETNAME-SPOKE1**.
+1. In the list of virtual networks, click **VNET-TAE-Spoke1**.
 
-1. On the **VNETNAME-SPOKE1** virtual network blade, in the **Settings** section, click **Peerings** and then click **+ Add**.
+1. On the **VNET-TAE-Spoke1** virtual network blade, in the **Settings** section, click **Peerings** and then click **+ Add**.
 
 1. Specify the following settings (leave others with their default values) and click **Add**:
 
@@ -374,7 +374,7 @@ Hands-on Lab
     | Virtual network deployment model | **Resource manager** |
     | I know my resource ID | unselected |
     | Subscription | the name of the Azure subscription you are using in this lab |
-    | Virtual network | **VNETNAME-HUB** |
+    | Virtual network | **VNET-TAE-Hub** |
     | Traffic to remote virtual network | **Allow (default)** |
     | Traffic forwarded from remote virtual network | **None** |
     | Virtual network gateway | **Use this virtual network's gateway** |
@@ -393,12 +393,12 @@ Hands-on Lab
     | Virtual network deployment model | **Resource manager** |
     | I know my resource ID | unselected |
     | Subscription | the name of the Azure subscription you are using in this lab |
-    | Virtual network | **VNETNAME-HUB** |
+    | Virtual network | **VNET-TAE-Hub** |
     | Traffic to remote virtual network | **Allow (default)** |
     | Traffic forwarded from remote virtual network | **Allow (default)** |
     | Virtual network gateway | **None** |
 
-1. At the top of the Azure portal, enter the name of a **VMNAMESPOKE1** that is in the running state, in the search box. When the name of the VM appears in the search results, select it.
+1. At the top of the Azure portal, enter the name of a **VMSPOKE1** that is in the running state, in the search box. When the name of the VM appears in the search results, select it.
 
 1. Under Settings on the left, select **Networking**, and navigate to the network interface resource by selecting its name. View network interfaces.
 
@@ -410,19 +410,19 @@ Hands-on Lab
 
 1. Within the Remote Desktop session to **Virtual machine**, right-click the **Start** button and, in the right-click menu, click **Windows PowerShell (Admin)**.
 
-1. In the Windows PowerShell console window, run the following to test connectivity to **VNETNAME-SPOKE1**.
+1. In the Windows PowerShell console window, run the following to test connectivity to **VMSPOKE01**.
 
    ```pwsh
-   Test-NetConnection -ComputerName IPADDRESS-VM-HUB -Port 3389 -InformationLevel 'Detailed'
+   Test-NetConnection -ComputerName IPADDRESS-VMHUB01 -Port 3389 -InformationLevel 'Detailed'
    ```
     >**Note**: The test uses TCP 3389 since this is this port is allowed by default by operating system firewall. 
 
 1. Examine the output of the command and verify that the connection was successful.
 
-1. In the Windows PowerShell console window, run the following to test connectivity to **VMNAME-HUB** 
+1. In the Windows PowerShell console window, run the following to test connectivity to **VMHUB01** 
 
    ```pwsh
-   Test-NetConnection -ComputerName IPADDRESS-VM-SPOKE -Port 3389 -InformationLevel 'Detailed'
+   Test-NetConnection -ComputerName IPADDRESS-VMSPOKE01 -Port 3389 -InformationLevel 'Detailed'
    ```
 1. Examine the output of the command and verify that the connection was successful.
 
@@ -439,7 +439,7 @@ Hands-on Lab
     | Setting | Value |
     | --- | --- |
     | Subscription | the name of the Azure subscription you are using in this lab |
-    | Resource Group | **RGNAME-NETWORK** |
+    | Resource Group | **RG-TAE-Networks** |
     | Name | **NSG-WEB** |
     | Region | the name of the Azure region where you deployed all other resources in this lab |
 
@@ -462,7 +462,7 @@ Hands-on Lab
 
 1. On the **NSG-WEB** network security group blade, in the **Settings** section, click **Network interfaces** and then click **+ Associate**.
 
-1. Associate the **NSG_WEB** network security group with the **Network interface**.
+1. Associate in the **VMHUB01** network security group with the **Network interface**.
 
     >**Note**: It may take up to 5 minutes for the rules from the newly created Network Security Group to be applied to the Network Interface Card.
 
@@ -476,12 +476,12 @@ Hands-on Lab
 
 1. Under **Support + troubleshooting**, you can view Effective security rules.
 
-1. Navigate back to computer.
+1. Navigate back to your computer.
 
 1. In the Virtual Machine Connection window, start Windows PowerShell and, in the **Administrator: Windows PowerShell** window run the following to set connection test. 
 
    ```powershell
-   Test-NetConnection -ComputerName PUBLICIPADDRESS-VM -Port 80 -InformationLevel 'Detailed'
+   Test-NetConnection -ComputerName PUBLICIPADDRESS-VMHUB01 -Port 80 -InformationLevel 'Detailed'
    ```
 1. Examine the output of the command and verify that the connection was successful.
 
@@ -493,17 +493,19 @@ Hands-on Lab
 
 Implement a Hub-spoke topology
 
-   ![Screenshot of the Hub-spoke](/AllFiles/Images/IMG02.png)
+   ![Screenshot of the Hub-spoke](/AllFiles/Images/Hub-Spoke.png)
 
 **Important Notes**
-- Gateway VPN on the hub network
-- Virtual machines on the spoke network running Ubuntu server
-- VNET Peering connection in the hub to allow gateway transit
-- VNET Peering connection in each spoke to use remote gateways
-- VNET Peering connections to allow forwarded 
-traffic
-- Custom Route tables to address prefix "0.0.0.0" and next hop type to virtual applicance
-- Network rule Azure Firewall all traffic
+- Three Virtual Networks;
+- Gateway VPN on the hub network;
+- Virtual machines on the spoke2 network running Ubuntu server;
+- VNET Peering connection Hub to spoke and vice verse
+- VNET Peering connection in the hub to allow gateway transit;
+- VNET Peering connection in each spokes to use remote gateways;
+- VNET Peering connections to allow forwarded;
+- Azure Firewall on the Hub network;
+- Custom Route tables to address prefix "0.0.0.0" and next hop type to virtual applicance **IP Azure Firewall**;
+- Network rule Azure Firewall all traffic;
 - DNAT rules Azure Firewall to destination ports RDP (3389).
 
 References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)
