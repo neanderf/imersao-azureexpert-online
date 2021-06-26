@@ -75,7 +75,7 @@ Hands-on Lab
     | Route table | **None** |
     | | |
 
-## Lab #03 - Virtual Machine (15 minutes)
+## Lab #03 - Virtual Machine (20 minutes)
 
 1. In the Azure portal, search for and select **Virtual machines** and, on the **Virtual machines** blade, click **+ Add**.
 
@@ -205,7 +205,7 @@ Hands-on Lab
 
 1. Verify that the output of the command includes the private IP address of **VMHub01**.
 
-## Lab #05 - Network Security groups (20 minutes)
+## Lab #05 - Network Security groups (15 minutes)
 
 1. In the Azure portal, navigate back to the resource group blade, and in the list of its resources, click **Virtual machine**.
 
@@ -268,7 +268,7 @@ Hands-on Lab
 
 1. Examine the navegate was successful.
 
-## Lab #06 - Azure Storage Blobs (15 minutes)
+## Lab #06 - Azure Storage Blobs (20 minutes)
 
 1. In the Azure portal, search for and select **Storage accounts** and, on the **Storage accounts** blade, select **+ Add**.
 
