@@ -196,7 +196,7 @@ Hands-on Lab
 
 1. Switch to the RDP session to **VMHUB01**.
 
-1. In the Terminal console, run the following to test internal name resolution of the **az104-04-vm1** DNS record set in the newly created private DNS zone:
+1. In the Terminal console, run the following to test internal name resolution of the **VMHUB01** DNS record set in the newly created private DNS zone:
 
    ```powershell
    nslookup vmhub01.azureexpert.corp
