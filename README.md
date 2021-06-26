@@ -465,12 +465,10 @@ Implement a Hub-spoke topology
 - Three Virtual Networks;
 - Virtual machines on the Spoke2 network running Ubuntu server;
 - VNET Peering connection Hub to spoke and vice verse
-- VNET Peering connection in the hub to allow gateway transit;
-- VNET Peering connection in each spokes to use remote gateways;
 - VNET Peering connections to allow forwarded;
 - Azure Firewall on the Hub network;
 - Azure Bastion on the Hub network;
-- Custom Route tables to address prefix "0.0.0.0" and next hop type to virtual applicance **IP Azure Firewall**;
+- Custom Route tables to address prefix "Address spcae Spoke 1 and Spoke 2" and next hop type to virtual applicance **IP Azure Firewall**;
 - Network rule Azure Firewall all traffic.
 
 References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/hub-spoke)
