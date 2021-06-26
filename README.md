@@ -26,14 +26,14 @@ Hands-on Lab
 
 1. Search for and select **Resource groups**. 
 
-1. On the **Resource groups** blade, click **+ Add** and create a resource group with the following settings:
+1. On the **Resource groups** blade, click **+ Create** and create a resource group with the following settings:
 
     |Setting|Value|
     |---|---|
     |Subscription| the name of the Azure subscription you will use in this lab |
     |Resource Group| **RG-TAE-VMs**|
     |Region| East US 2 |
-    |Tags| environment: resource, project: azureexpert |
+    |Tags| project: azureexpert |
     | | |
 
 1. Repeat and create the Resources groups name "RGNAME-NETWORKING" and "RGNAME-STORAGE".
@@ -44,7 +44,7 @@ Hands-on Lab
 
 ## Lab #02 - Virtual Networks (15 minutes)
 
-1. In the Azure portal, search for and select **Virtual networks**, and, on the **Virtual networks** blade, click **+ Add**.
+1. In the Azure portal, search for and select **Virtual networks**, and, on the **Virtual networks** blade, click **+ Create**.
 
 1. Create a virtual network with the following settings (leave others with their default values):
 
@@ -77,7 +77,7 @@ Hands-on Lab
 
 ## Lab #03 - Virtual Machine (20 minutes)
 
-1. In the Azure portal, search for and select **Virtual machines** and, on the **Virtual machines** blade, click **+ Add**.
+1. In the Azure portal, search for and select **Virtual machines** and, on the **Virtual machines** blade, click **+ Create**.
 
 1. On the **Basics** tab of the **Create a virtual machine** blade, specify the following settings (leave others with their default values):
 
@@ -113,7 +113,6 @@ Hands-on Lab
     | Subnet | **FrontEnd** |
     | Public IP | **VMHUB01-PI** |
     | NIC network security group | **Basic** |
-    | Accelerated networking | **Off** |
 	| Inbound Ports | **RDP (3389)** and HTTP (80)|
     | Place this virtual machine behind an existing load balancing solution? | **No** |
     | | |
@@ -158,7 +157,7 @@ Hands-on Lab
 
 ## Lab #04 - Configure Azure DNS for internal name resolution (15 minutes)
 
-1. In the Azure portal, search for and select **Private DNS zones** and, on the **Private DNS zones** blade, click **+ Add**.
+1. In the Azure portal, search for and select **Private DNS zones** and, on the **Private DNS zones** blade, click **+ Create**.
 
 1. Create a private DNS zone with the following settings (leave others with their default values):
 
@@ -207,11 +206,7 @@ Hands-on Lab
 
 ## Lab #05 - Network Security groups (15 minutes)
 
-1. In the Azure portal, navigate back to the resource group blade, and in the list of its resources, click **Virtual machine**.
-
-1. On the **Virtual machine** blade, click **Connect**, in the drop-down menu, click **RDP**, on the **Connect with RDP** blade, click **Download RDP File** and follow the prompts to start the Remote Desktop session.
-
-1. In the Azure portal, search for and select **Network security groups**, and, on the **Network security groups** blade, click **+ Add**.
+1. In the Azure portal, search for and select **Network security groups**, and, on the **Network security groups** blade, click **+ Create**.
 
 1. Create a network security group with the following settings (leave others with their default values):
 
@@ -239,17 +234,15 @@ Hands-on Lab
     | Priority | **200** |
     | Name | **Allow-Port_80-443** |
 
+1. Go to the Azure portal to view your **Network security groups**. Search for and select Network security groups is created.
+
+    >**Note**: If another Network security groups rule is already attached to the Network interface, it is necessary to remove it.
+
 1. On the **NSG-WEB** network security group blade, in the **Settings** section, click **Network interfaces** and then click **+ Associate**.
 
 1. Associate in the **VMHUB01** network security group with the **Network interface**.
 
     >**Note**: It may take up to 5 minutes for the rules from the newly created Network Security Group to be applied to the Network Interface Card.
-
-1. Go to the Azure portal to view your **Network security groups**. Search for and select Network security groups.
-
-1. Select the name of your Network security group.
-
-**Note:** If necessary desatch associated Network security groups.
 
 1. In the menu bar of the network security group, under Settings, you can view the Inbound security rules, Outbound security rules, Network interfaces, and Subnets that the network security group is associated to.
 
@@ -270,7 +263,7 @@ Hands-on Lab
 
 ## Lab #06 - Azure Storage Blobs (20 minutes)
 
-1. In the Azure portal, search for and select **Storage accounts** and, on the **Storage accounts** blade, select **+ Add**.
+1. In the Azure portal, search for and select **Storage accounts** and, on the **Storage accounts** blade, select **+ Create**.
 
 1. On the **Basics** tab of the **Create storage account** blade, specify the following settings (leave others with their default values):
 
@@ -369,7 +362,7 @@ Hands-on Lab
 
 ## Lab #08 - Azure VNET Peering (30 minutes)
 
-1. In the Azure portal, search for and select **Virtual networks**, and, on the **Virtual networks** blade, click **+ Add**.
+1. In the Azure portal, search for and select **Virtual networks**, and, on the **Virtual networks** blade, click **+ Createt**.
 
 1. Create a virtual network with the following settings (leave others with their default values):
 
@@ -390,7 +383,7 @@ Hands-on Lab
 
 1. In the Azure portal, search for and select **Virtual machines**
 
-1. On the **Virtual machines**, click **Add** and create a new Virtual machine, on the **VMSPOKE01**.
+1. On the **Virtual machines**, click **Create** and create a new Virtual machine, on the **VMSPOKE01**.
 
 1. In the Azure portal, search for and select **Virtual networks**.
 
@@ -429,7 +422,7 @@ Hands-on Lab
     | Virtual network deployment model | **Resource manager** |
     | I know my resource ID | unselected |
     | Subscription | the name of the Azure subscription you are using in this lab |
-    | Virtual network | **VNET-TAE-Hub** |
+    | Virtual network | **VNET-TAE-Spoke1** |
     | Traffic to remote virtual network | **Allow (default)** |
     | Traffic forwarded from remote virtual network | **Allow (default)** |
     | Virtual network gateway | **None** |
