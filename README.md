@@ -42,7 +42,7 @@ Hands-on Lab
 
 1. Explore properties to Resource groups.
 
-## Lab #02 - Virtual Networks (15 minutes)
+## Lab #02 - Virtual Networks (10 minutes)
 
 1. In the Azure portal, search for and select **Virtual networks**, and, on the **Virtual networks** blade, click **+ Create**.
 
