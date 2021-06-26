@@ -36,7 +36,7 @@ Hands-on Lab
     |Tags| project: azureexpert |
     | | |
 
-1. Repeat and create the Resources groups name "RGNAME-NETWORKING" and "RGNAME-STORAGE".
+1. Repeat and create the Resources groups name "RG-TAE-Networks" and "RG-TAE-Storage".
 
 1. Click **Review + Create** and then click **Create**.
 
