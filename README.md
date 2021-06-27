@@ -722,6 +722,9 @@ $customConfig = @{
   "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File VMSS-Install-IIS_v1.ps1" 
 } 
 
+    $ Install Web server
+Install-WindowsFeature -name Web-Server -IncludeManagementTools
+
     # Set VMSS variables
 $rgname = "rg-tae-vmss"
 $vmssname = "vmsstaeweb"
@@ -740,7 +743,7 @@ Update-AzVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet
 
 1. Run the following command **./Add-CustomExtension-VMSS.ps1**.
 
-1. In **VMSTAESWEB**, select **Extensions** and check a new extension.
+1. In **VMSSTAESWEB**, select **Extensions** and check a new extension.
 
 1. Select **Instances** in **VMSSTAEWEB**, click **Upgrade** for all instances.
 
