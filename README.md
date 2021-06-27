@@ -700,14 +700,11 @@ Test open Browser to IP Address the Virtual machines.
 
 1. In **Virtual Machine Scale Sets**, select **Instances** and connect on Virtual machines.
 
-1. Install the Web-Server feature in the all Virtual machines by running the following command in the **Administrator Windows PowerShell** command prompt. You can copy and paste this command.
-
-   ```powershell
-   Install-WindowsFeature -name Web-Server -IncludeManagementTools
-   ```
 1. Back in the portal, navigate back to the Overview blade of **Virtual Machine Scale Sets** and, use the Click to clipboard button to copy the public IP address.
 
 1. In a **Browser**, navigate to the Public IP Address the VMSS.
+    
+    > **Note**: You didn't notice that you won't connect because you don't have a Web Server.
 
 1. Sign in to the [**Azure portal**](http://portal.azure.com) and open Azure Cloud Shell.
 
