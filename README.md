@@ -666,7 +666,7 @@ Test open Browser to IP Address the Virtual machines.
 
 1. In the **Basics** tab, under **Project details**, make sure the correct subscription is selected and then choose to **Create new** resource group. Type **RG-VMSS** for the name and then select **OK**.
 
-1. Type **VMSSWEB** as the name for your scale set.
+1. Type **VMSSTAEWEB** as the name for your scale set.
 
 1. In **Region**, select a region that is close to your area.
 
@@ -740,9 +740,9 @@ Update-AzVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet
 
 1. Run the following command **./Add-CustomExtension-VMSS.ps1**.
 
-1. In **VMSSWEB**, select **Extensions** and check a new extension.
+1. In **VMSTAESWEB**, select **Extensions** and check a new extension.
 
-1. Select **Instances** in **VMSSWEB**, click **Upgrade** for all instances.
+1. Select **Instances** in **VMSSTAEWEB**, click **Upgrade** for all instances.
 
     > **Note**: You might need to wait a few minutes.
 
