@@ -948,8 +948,8 @@ In this task, you will swap the staging slot with the production slot
     | Setting | Value |
     | ---- | ---- |
     | Subscription | the name of the Azure subscription you are using in this lab |
-    | Resource group | the name of a new resource group **RGNAME** |
-    | Container name | **aciname** |
+    | Resource group | the name of a new resource group **RG-TAE-Container** |
+    | Container name | **acitaeweb** |
     | Region | the name of a region where you can provision Azure container instances |
     | Image Source | **Quickstart images** |
     | Image | **microsoft/aci-helloworld (Linux)** |
@@ -1083,11 +1083,81 @@ In this task, you will swap the staging slot with the production slot
 
 1. Do not continue with creating the support request. Instead, sign out as the user from the Azure portal and close the InPrivate browser window.
 
+## Lab #07 - Azure Backup (30 minutes)
 
+1. In the Azure portal, search for and select **Recovery Services vaults** and, on the **Recovery Services vaults** blade, click **+ Create**.
+
+1. On the **Create Recovery Services vault** blade, specify the following settings:
+
+    | Settings | Value |
+    | --- | --- |
+    | Subscription | the name of the Azure subscription you are using in this lab |
+    | Resource group | the name of a new resource group **RG-TAE-Backup** |
+    | Name | **RSV-TAE-Backup** |
+    | Region | the name of a region where you deployed the two virtual machines in the previous task |
+
+    >**Note**: Make sure that you specify the same region into which you deployed virtual machines.
+
+1. Click **Review + Create** and then click **Create**.
+
+    >**Note**: Wait for the deployment to complete. The deployment should take less than 1 minute.
+
+1. When the deployment is completed, click **Go to Resource**. 
+
+1. On the **RSV-TAE-Backup** Recovery Services vault blade, in the **Settings** section, click **Properties**.
+
+1. On the **RSV-TAE-Backup - Properties** blade, click the **Update** link under **Backup Configuration** label.
+
+1. On the **Backup Configuration** blade, note that you can set the **Storage replication type** to either **Locally-redundant** or **Geo-redundant**. Leave the default setting of **Geo-redundant** in place and close the blade.
+
+    >**Note**: This setting can be configured only if there are no existing backup items.
+
+1. Back on the **RSV-TAE-Backup - Properties** blade, click the **Update** link under **Security Settings** label. 
+
+1. On the **Security Settings** blade, note that **Soft Delete (For Azure Virtual Machines)** is **Enabled**.
+
+1. Close the **Security Settings** blade and, back on the **RSVNAME** Recovery Services vault blade, click **Overview**.
+
+1. On the **RSV-TAE-Backup** Recovery Services vault blade, click **+ Backup**.
+
+1. On the **Backup Goal** blade, specify the folowing settings:
+
+    | Settings | Value |
+    | --- | --- |
+    | Where is your workload running? | **Azure** |
+    | What do you want to backup? | **Virtual machine** |
+
+1. On the **Backup Goal** blade, click **Backup**.
+
+1. On the **Backup policy**, review the **DefaultPolicy** settings and select **Create a new policy**.
+
+1. Define a new backup policy with the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | ---- | ---- |
+    | Policy name | **BP-VMS** |
+    | Frequency | **Daily** |
+    | Time | **22:00 PM** |
+    | Timezone | the name of your local time zone |
+    | Retain instant recovery snapshot(s) for | **2** Days(s) |
+
+1. Click **OK** to create the policy and then, in the **Virtual Machines** section, select **Add**.
+
+1. On the **Select virtual machines** blade, select **VMTAEHUB01**, click **OK**, and, back on the **Backup** blade, click **Enable backup**.
+
+    >**Note**: Wait for the backup to be enabled. This should take about 2 minutes. 
+
+1. Navigate back to the **RSV-TAE-Backup** Recovery Services vault blade, in the **Protected items** section, click **Backup items**, and then click the **Azure virtual machines** entry.
+
+1. On the **Backup Items (Azure Virtual Machine)** blade of **VMNAME**, review the values of the **Backup Pre-Check** and **Last Backup Status** entries, and click the **VMTAEHUB01** entry.
+
+1. On the **VMNAME** Backup Item blade, click **Backup now**, accept the default value in the **Retain Backup Till** drop-down list, and click **OK**.
+
+ >**Note**: Do not wait for the backup to complete but instead proceed.
 
 ## Project #02 - Azure Kubernetes Service (60 minutes)
 
-2. Kubernetes architecture.
+Kubernetes architecture.
 
    ![Screenshot of the Kubernetes archicture](/AllFiles/Images/IMG03.png)
 
