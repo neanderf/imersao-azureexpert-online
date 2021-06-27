@@ -1008,7 +1008,7 @@ In this task, you will swap the staging slot with the production slot
     | User name | **AzureExpert** |
     | Name | **Azure Expert** |
     | Let me create the password | enabled |
-    | Initial password | **Pa55w.rd124** |
+    | Initial password | **Azur3Exp3rt*** |
     | Usage location | **United States** |
     | Job title | **Azure Expert** |
     | Department | **IT** |
