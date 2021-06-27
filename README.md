@@ -815,7 +815,7 @@ Update-AzVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet
 
     > **Note**: You might need to wait a few minutes.
 
-## Lab #03 - Azure App Service (30 minutes)
+## Lab #03 - Azure App Service (15 minutes)
 
 1. Sign in to the [**Azure portal**](http://portal.azure.com).
 
@@ -937,7 +937,7 @@ In this task, you will swap the staging slot with the production slot
 
 1. Verify the default web page has been replaced with the **Hello World!** page.
 
-## Lab #04 - Azure Container Instances (30 minutes)
+## Lab #04 - Azure Container Instances (15 minutes)
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 
