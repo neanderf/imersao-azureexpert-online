@@ -708,6 +708,12 @@ Test open Browser to IP Address the Virtual machines.
 
 1. Sign in to the [**Azure portal**](http://portal.azure.com) and open Azure Cloud Shell.
 
+1. In the Azure portal, open the **Azure Cloud Shell** by clicking on the icon in the top right of the Azure Portal.
+
+1. If prompted to select either **Bash** or **PowerShell**, select **PowerShell**. 
+
+    >**Note**: If this is the first time you are starting **Cloud Shell** and you are presented with the **You have no storage mounted** message, select the subscription you are using in this lab, and click **Create storage**. 
+
 1. In Cloud Shell, start the code editor and create a file named **code Add-CustomExtension-VMSS.ps1**.
 
 1. Add the following text to the script file:
@@ -808,6 +814,473 @@ Update-AzVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet
 1. In the Azure portal, on the **VMSSWEB** blade, review the **CPU (average)** chart and verify that the CPU utilization of the Application Gateway increased sufficiently to trigger scaling out.
 
     > **Note**: You might need to wait a few minutes.
+
+## Lab #03 - Azure App Service (30 minutes)
+
+1. Sign in to the [**Azure portal**](http://portal.azure.com).
+
+1. In the Azure portal, search for and select **App services**, and, on the **App Services** blade, click **+ Add**.
+
+1. On the **Basics** tab of the **Web App** blade, specify the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | --- | ---|
+    | Subscription | the name of the Azure subscription you are using in this lab |
+    | Resource group | the name of a new resource group **RG-TAE-App** |
+    | Web app name | any globally unique name |
+    | Publish | **Code** |
+    | Runtime stack | **PHP 7.3** |
+    | Operating system | **Windows** |
+    | Region | the name of an Azure region where you can provision Azure web apps |
+    | App service plan | accept the default configuration |
+
+1. Click **Next : Monitoring >**, on the **Monitoring** tab of the **Web App** blade, set the **Enable Application Insights** switch to **No**, click **Review + create**, and then click **Create**. 
+
+    >**Note**: Typically, you would want to enable **Application Insights**, however, its functionality is not used in this lab.
+
+    >**Note**: Wait until the web app is created before you proceed to the next task. This should take about a minute. 
+
+1. On the deployment blade, click **Go to resource**.
+
+1. On the blade of the newly deployed web app, click the **URL** link to display the default web page in a new browser tab.
+
+1. Close the new browser tab and, back in the Azure portal, in the **Deployment** section of the web app blade, click **Deployment slots**. 
+
+    >**Note**: The web app, at this point, has a single deployment slot labeled **PRODUCTION**. 
+
+1. Click **+ Add slot**, and add a new slot with the following settings: 
+
+    | Setting | Value |
+    | --- | ---|
+    | Name | **staging** |
+    | Clone settings from | **Do not clone settings**|
+
+1. Back on the **Deployment slots** blade of the web app, click the entry representing the newly created staging slot. 
+
+    >**Note**: This will open the blade displaying the properties of the staging slot. 
+
+1. Review the staging slot blade and note that its URL differs from the one assigned to the production slot.
+
+1. On the staging deployment slot blade, in the **Deployment** section, click **Deployment Center**.
+
+    >**Note:** Make sure you are on the staging slot blade (rather than the production slot).
+
+1. In the **Continuous Deployment (CI/CD)** section, select **Local Git**, and then click **Save**.
+
+1. Copy the resulting **Git Clone Url** to Notepad.
+
+    >**Note:** You will need the Git Clone Url value in the next task of this lab.
+
+1. Click **Local Git/FTPS credentials** toolbar icon to display **Deployment Credentials** pane. 
+
+1. Click **User scope**.
+
+1. Complete the required information, and then click **Save Credentials**. 
+
+    | Setting | Value |
+    | --- | ---|
+    | User name | any unique name (must not contain `@` character) |
+    | Password | any password that satisfies complexity requirements |
+    
+    >**Note:** The password must be at least eight characters long, with two of the following three elements: letters, numbers, and non-alphanumeric characters.
+
+    >**Note:** You will need these credentials in the next task of this lab.
+
+1. In the Azure portal, open the **Azure Cloud Shell** by clicking on the icon in the top right of the Azure Portal.
+
+1. If prompted to select either **Bash** or **PowerShell**, select **PowerShell**. 
+
+    >**Note**: If this is the first time you are starting **Cloud Shell** and you are presented with the **You have no storage mounted** message, select the subscription you are using in this lab, and click **Create storage**. 
+
+1. From the Cloud Shell pane, run the following to clone the remote repository containing the code for the web app.
+
+   ```pwsh
+   git clone https://github.com/Azure-Samples/php-docs-hello-world
+   ```
+ 
+1. From the Cloud Shell pane, run the following to set the current location to the newly created clone of the local repository containing the sample web app code.
+
+   ```
+   Set-Location -Path $HOME/php-docs-hello-world/
+   ```
+
+1. From the Cloud Shell pane, run the following to add the remote git (make sure to replace the `[deployment_user_name]` and `[git_clone_url]` placeholders with the value of the **Deployment Credentials** user name and **Git Clone Url**, respectively, which you identified in previous task):
+
+   ```
+   git remote add [deployment_user_name] [git_clone_url]
+   ```
+
+    >**Note**: The value following `git remote add` does not have to match the **Deployment Credentials** user name, but has to be unique
+
+1. From the Cloud Shell pane, run the following to push the sample web app code from the local repository to the Azure web app staging deployment slot (make sure to replace the `[deployment_user_name]` placeholder with the value of the **Deployment Credentials** user name, which you identified in previous task):
+   ```
+   git push [deployment_user_name] master
+   ```
+
+1. If prompted to authenticate, type the `[deployment_user_name]` and the corresponding password (which you set in the previous task).
+
+1. Close the Cloud Shell pane.
+
+1. On the staging slot blade, click **Overview** and then click the **URL** link to display the default web page in a new browser tab.
+
+1. Verify that the browser page displays the **Hello World!** message and close the new tab.
+
+In this task, you will swap the staging slot with the production slot
+
+1. Navigate back to the blade displaying the production slot of the web app.
+
+1. In the **Deployment** section, click **Deployment slots** and then, click **Swap** toolbar icon.
+
+1. On the **Swap** blade, review the default settings and click **Swap**. 
+
+1. Click **Overview** on the production slot blade of the web app and then click the **URL** link to display the web site home page in a new browser tab.
+
+1. Verify the default web page has been replaced with the **Hello World!** page.
+
+## Lab #04 - Azure Container Instances (30 minutes)
+
+1. Sign in to the [Azure portal](https://portal.azure.com).
+
+1. In the Azure portal, search for locate **Container instances** and then, on the **Container instances** blade, click **+ Add**. 
+
+1. On the **Basics** tab of the **Create container instance** blade, specify the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | ---- | ---- |
+    | Subscription | the name of the Azure subscription you are using in this lab |
+    | Resource group | the name of a new resource group **RGNAME** |
+    | Container name | **aciname** |
+    | Region | the name of a region where you can provision Azure container instances |
+    | Image Source | **Quickstart images** |
+    | Image | **microsoft/aci-helloworld (Linux)** |
+
+1. Click **Next: Networking >** and, on the **Networking** tab of the **Create container instance** blade, specify the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | --- | --- |
+    | DNS name label | any valid, globally unique DNS host name |
+	
+    >**Note**: Your container will be publicly reachable at dns-name-label.region.azurecontainer.io. If you receive a **DNS name label not available** error message, specify a different value.
+
+1. Click **Next: Advanced >**, review the settings on the **Advanced** tab of the **Create container instance** blade without making any changes, click **Review + Create**, and then click **Create**. 
+
+    >**Note**: Wait for the deployment to complete. This should take about 3 minutes.
+
+    >**Note**: While you wait, you may be interested in viewing the [code behind the sample application](https://github.com/Azure-Samples/aci-helloworld). To view it, browse the \app folder. 
+
+1. On the deployment blade, click the **Go to resource** link.
+
+1. On the **Overview** blade of the container instance, verify that **Status** is reported as **Running**. 
+
+1. Copy the value of the container instance **FQDN**, open a new browser tab, and navigate to the corresponding URL.
+
+1. Verify that the **Welcome to Azure Container Instance** page is displayed.
+
+1. Close the new browser tab, back in the Azure portal, in the **Settings** section of the container instance blade, click **Containers**, and then click **Logs**. 
+
+1. Verify that you see the log entries representing the HTTP GET request generated by displaying the application in the browser.
+
+## Lab #05 - Azure AD (15 minutes)
+
+1. In the Azure portal, search for and select **Azure Active Directory**.
+
+1. Click **+ Create a tenant** and specify the following setting:
+
+    | Setting | Value |
+    | --- | --- |
+    | Directory type | **Azure Active Directory** |
+    | Organization name | **Azure Expert** |
+    | Initial domain name | any valid DNS name consisting of lower case letters and digits and starting with a letter | 
+    | Country/Region | **United States** |
+
+   > **Note**: The green check mark in the **Initial domain name** text box will indicate that the domain name you typed in is valid and unique.
+
+1. Click **Review + create** and then click **Create**.
+
+1. Display the blade of the newly created Azure AD tenant by using the **Click here to navigate to your new directory: Contoso Lab** link or the **Directory + Subscription** button (directly to the right of the Cloud Shell button) in the Azure portal toolbar.
+
+ Navigate back to the **Users - All users** blade, and then click **+ New user**.
+
+1. Create a new user with the following settings (leave others with their defaults):
+
+    | Setting | Value |
+    | --- | --- |
+    | User name | **AzureExpert** |
+    | Name | **Azure Expert** |
+    | Let me create the password | enabled |
+    | Initial password | **Pa55w.rd124** |
+    | Usage location | **United States** |
+    | Job title | **Azure Expert** |
+    | Department | **IT** |
+
+    >**Note**: **Copy to clipboard** the full **User Principal Name** (user name plus domain). You will need it later in this task.
+
+1. In the list of users, click the newly created user account to display its blade.
+
+1. Review the options available in the **Manage** section and note that you can identify the Azure AD roles assigned to the user account as well as the user account's permissions to Azure resources.
+
+1. In the **Manage** section, click **Assigned roles**, then click **+ Add assignment** button and assign the **User administrator** role to user.
+
+    >**Note**: You also have the option of assigning Azure AD roles when provisioning a new user.
+
+1. Open an **InPrivate** browser window and sign in to the [Azure portal](https://portal.azure.com) using the newly created user account. When prompted to update the password, change the password for the user.
+
+    >**Note**: Rather than typing the user name (including the domain name), you can paste the content of Clipboard.
+
+1. In the **InPrivate** browser window, in the Azure portal, search for and select **Azure Active Directory**.
+
+1. In the **InPrivate** browser window, on the Azure AD blade, scroll down to the **Manage** section, click **User settings**, and note that you do not have permissions to modify any configuration options.
+
+1. In the Azure portal, navigate back to the Azure AD tenant blade and click **Groups**.
+
+1. Use the **+ New group** button to create a new group with the following settings:
+
+    | Setting | Value |
+    | --- | --- |
+    | Group type | **Security** |
+    | Group name | **GS-AzureExpert** |
+    | Group description | **Azure Expert Team** |
+    | Membership type | **Assigned** |
+
+1. Click **No members selected**.
+
+1. From the **Add members** blade, search and select the **AzureExpert** appears in the list of user members.
+
+## Lab #06 - Azure RBAC (20 minutes)
+
+1. In the Azure portal, search for and select **Azure Active Directory**, on the Azure Active Directory blade, click **Users**, and then click **+ New user**.
+
+1. Create a new user with the following settings (leave others with their defaults):
+
+    | Setting | Value |
+    | --- | --- |
+    | User name | **azure-support**|
+    | Name | **Azure-Support**|
+    | Let me create the password | enabled |
+    | Initial password | **Pa55w.rd124** |
+
+    >**Note**: **Copy to clipboard** the full **User name**. You will need it later in this lab.
+
+1. In the Azure portal, navigate back to the **Subscritions** and display its **details**.
+
+1. Click **Access control (IAM)**, click **+ Add** followed by **Role assignment**, and assign the **Support Request Contributor (Custom)** role to the newly created user account.
+
+1. Open an **InPrivate** browser window and sign in to the [Azure portal](https://portal.azure.com) using the newly created user account. When prompted to update the password, change the password for the user.
+
+    >**Note**: Rather than typing the user name, you can paste the content of Clipboard.
+
+1. In the **InPrivate** browser window, in the Azure portal, search and select **Resource groups** to verify that the user can see all resource groups.
+
+1. In the **InPrivate** browser window, in the Azure portal, search and select **All resources** to verify that the user cannot see any resources.
+
+1. In the **InPrivate** browser window, in the Azure portal, search and select **Help + support** and then click **+ New support request**. 
+
+1. In the **InPrivate** browser window, on the **Basic** tab of the **Help + support - New support request** blade, select the **Service and subscription limits (quotas)** issue type and note that the subscription you are using in this lab is listed in the **Subscription** drop-down list.
+
+    >**Note**: The presence of the subscription you are using in this lab in the **Subscription** drop-down list indicates that the account you are using has the permissions required to create the subscription-specific support request.
+
+    >**Note**: If you do not see the **Service and subscription limits (quotas)** option, sign out from the Azure portal and sign in back.
+
+1. Do not continue with creating the support request. Instead, sign out as the user from the Azure portal and close the InPrivate browser window.
+
+
+
+## Project #02 - Azure Kubernetes Service (60 minutes)
+
+2. Kubernetes architecture.
+
+   ![Screenshot of the Kubernetes archicture](/AllFiles/Images/IMG03.png)
+
+#### Register the Microsoft Kubernetes resource providers.
+
+1. Sign in to the [Azure portal](https://portal.azure.com).
+
+1. In the Azure portal, open the **Azure Cloud Shell** by clicking on the icon in the top right of the Azure Portal.
+
+1. If prompted to select either **Bash** or **PowerShell**, select **PowerShell**. 
+
+    >**Note**: If this is the first time you are starting **Cloud Shell** and you are presented with the **You have no storage mounted** message, select the subscription you are using in this lab, and click **Create storage**. 
+
+1. From the Cloud Shell pane, run the following to register the Microsoft.Kubernetes and Microsoft.KubernetesConfiguration resource providers.
+
+   ```pwsh
+   Register-AzResourceProvider -ProviderNamespace Microsoft.Kubernetes
+   
+   Register-AzResourceProvider -ProviderNamespace Microsoft.KubernetesConfiguration
+   ```
+
+1. Close the Cloud Shell pane.
+
+#### Deploy an Azure Kubernetes Service cluster
+
+1. In the Azure portal, search for locate **Kubernetes services** and then, on the **Kubernetes services** blade, click **+ Add**, and then click **+ Add Kubernetes cluster**. 
+
+1. On the **Basics** tab of the **Create Kubernetes cluster** blade, specify the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | ---- | ---- |
+    | Subscription | the name of the Azure subscription you are using in this lab |
+    | Resource group | the name of a new resource group **RGNAME** |
+    | Kubernetes cluster name | **aksclname** |
+    | Region | the name of a region where you can provision a Kubernetes cluster |
+    | Kubernetes version | accept the default |
+    | Node size | accept the default |
+    | Node count | **1** |
+
+1. Click **Next: Node Pools >** and, on the **Node Pools** tab of the **Create Kubernetes cluster** blade, specify the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | ---- | ---- |
+    | Virtual nodes | **Disabled** |
+    | VM scale sets | **Enabled** |
+	
+1. Click **Next: Authentication >** and, on the **Authentication** tab of the **Create Kubernetes cluster** blade, specify the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | ---- | ---- |
+    | Service principal | accept the default |
+    | Enable RBAC | **Yes** |
+
+1. Click **Next: Networking >** and, on the **Networking** tab of the **Create Kubernetes cluster** blade, specify the following settings (leave others with their default values):
+
+    | Setting | Value |
+    | ---- | ---- |
+    | Network configuration | **kubenet** |
+    | DNS name prefix | any valid, globally unique DNS host name |
+
+1. Click **Next: Integration >**, on the **Integration** tab of the **Create Kubernetes cluster** blade, set **Container monitoring** to **Disabled**, click **Review + create** and then click **Create**. 
+
+    >**Note**: In production scenarios, you would want to enable monitoring. Monitoring is disabled in this case since it is not covered in the lab. 
+
+    >**Note**: Wait for the deployment to complete. This should take about 10 minutes.
+
+#### Deploy pods into the Azure Kubernetes Service cluster
+
+1. On the deployment blade, click the **Go to resource** link.
+
+1. On the **aksclname** Kubernetes service blade, in the **Settings** section, click **Node pools**.
+
+1. On the **aksclname - Node pools** blade, verify that the cluster consists of a single pool with one node.
+
+1. In the Azure portal, open the **Azure Cloud Shell** by clicking on the icon in the top right of the Azure Portal.
+
+1. Switch the **Azure Cloud Shell** to **Bash** (black background).
+
+1. From the Cloud Shell pane, run the following to retrieve the credentials to access the AKS cluster:
+
+    ```sh
+    RESOURCE_GROUP='rgname'
+
+    AKS_CLUSTER='aksclnamev'
+
+    az aks get-credentials --resource-group $rgname--name $aksclname
+    ``` 
+
+1. From the **Cloud Shell** pane, run the following to verify connectivity to the AKS cluster:
+
+    ```sh
+    kubectl get nodes
+    ```
+
+1. In the **Cloud Shell** pane, review the output and verify that the one node which the cluster consists of at this point is reporting the **Ready** status. 
+
+1. From the **Cloud Shell** pane, run the following to deploy the **nginx** image from the Docker Hub:
+
+    ```sh
+    kubectl create deployment nginx-deployment --image=nginx
+    ```
+
+    > **Note**: Make sure to use lower case letters when typing the name of the deployment (nginx-deployment)
+
+1. From the **Cloud Shell** pane, run the following to verify that a Kubernetes pod has been created:
+
+    ```sh
+    kubectl get pods
+    ```
+
+1. From the **Cloud Shell** pane, run the following to identify the state of the deployment:
+
+    ```sh
+    kubectl get deployment
+    ```
+
+1. From the **Cloud Shell** pane, run the following to make the pod available from Internet:
+
+    ```sh
+    kubectl expose deployment nginx-deployment --port=80 --type=LoadBalancer
+    ```
+
+1. From the **Cloud Shell** pane, run the following to identify whether a public IP address has been provisioned:
+
+    ```sh
+    kubectl get service
+    ```
+
+1. Re-run the command until the value in the **EXTERNAL-IP** column for the **nginx-deployment** entry changes from **\<pending\>** to a public IP address. Note the public IP address in the **EXTERNAL-IP** column for **nginx-deployment**.
+
+1. Open a browser window and navigate to the IP address you obtained in the previous step. Verify that the browser page displays the **Welcome to nginx!** message.
+
+#### Scale containerized workloads in the Azure Kubernetes service cluster
+
+1. From the **Cloud Shell** pane, run the following to scale the deployment by increasing of the number of pods to 2:
+
+    ```sh
+    kubectl scale --replicas=2 deployment/nginx-deployment
+    ```
+
+1. From the **Cloud Shell** pane, run the following to verify the outcome of scaling the deployment:
+
+    ```sh
+    kubectl get pods
+    ```
+
+    > **Note**: Review the output of the command and verify that the number of pods increased to 2.
+
+1. From the **Cloud Shell** pane, run the following to scale out the cluster by increasing the number of nodes to 2:
+
+    ```sh
+    az aks scale --resource-group $rgname --name $aksclname --node-count 2
+    ```
+
+    > **Note**: Wait for the provisioning of the additional node to complete. This might take about 3 minutes. If it fails, rerun the `az aks scale` command.
+
+1. From the **Cloud Shell** pane, run the following to verify the outcome of scaling the cluster:
+
+    ```sh
+    kubectl get nodes
+    ```
+
+    > **Note**: Review the output of the command and verify that the number of nodes increased to 2.
+
+1. From the **Cloud Shell** pane, run the following to scale the deployment:
+
+    ```
+    kubectl scale --replicas=10 deployment/nginx-deployment
+    ```
+
+1. From the **Cloud Shell** pane, run the following to verify the outcome of scaling the deployment:
+
+    ```
+    kubectl get pods
+    ```
+
+    > **Note**: Review the output of the command and verify that the number of pods increased to 10.
+
+1. From the **Cloud Shell** pane, run the following to review the pods distribution across cluster nodes:
+
+    ```
+    kubectl get pod -o=custom-columns=NODE:.spec.nodeName,POD:.metadata.name
+    ```
+
+    > **Note**: Review the output of the command and verify that the pods are distributed across both nodes.
+
+1. From the **Cloud Shell** pane, run the following to delete the deployment:
+
+    ```
+    kubectl delete deployment nginx-deployment
+    ```
+1. Close the **Cloud Shell** pane.
+
 
 
 
