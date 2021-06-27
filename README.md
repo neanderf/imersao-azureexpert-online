@@ -708,7 +708,7 @@ Test open Browser to IP Address the Virtual machines.
 
 1. Sign in to the [**Azure portal**](http://portal.azure.com) and open Azure Cloud Shell.
 
-1. In Cloud Shell, start the code editor and create a file named **Add-CustomExtension-VMSS.ps1**.
+1. In Cloud Shell, start the code editor and create a file named **code Add-CustomExtension-VMSS.ps1**.
 
 1. Add the following text to the script file:
 
@@ -744,6 +744,8 @@ Update-AzVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet
     > **Note**: You might need to wait a few minutes.
 
 1. Test the Public IP address in Browser.
+
+    > **Note**: You will need to open port 80 (HTTP) internet access in Network Security Groups in Virtual Machine Scale Sets "VMSSTAEWEB"
 
 1. In the Azure portal, navigate to the **Virtual Machine Scale Sets** entry, and on the **VMSSWEB** blade, select **Scaling**. 
 
