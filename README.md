@@ -1190,8 +1190,8 @@ Kubernetes architecture.
     | Setting | Value |
     | ---- | ---- |
     | Subscription | the name of the Azure subscription you are using in this lab |
-    | Resource group | the name of a new resource group **RGNAME** |
-    | Kubernetes cluster name | **aksclname** |
+    | Resource group | the name of a new resource group **RG-TAE-AKS** |
+    | Kubernetes cluster name | **akstaecl** |
     | Region | the name of a region where you can provision a Kubernetes cluster |
     | Kubernetes version | accept the default |
     | Node size | accept the default |
@@ -1228,9 +1228,9 @@ Kubernetes architecture.
 
 1. On the deployment blade, click the **Go to resource** link.
 
-1. On the **aksclname** Kubernetes service blade, in the **Settings** section, click **Node pools**.
+1. On the **akstaecl** Kubernetes service blade, in the **Settings** section, click **Node pools**.
 
-1. On the **aksclname - Node pools** blade, verify that the cluster consists of a single pool with one node.
+1. On the **akstaecl - Node pools** blade, verify that the cluster consists of a single pool with one node.
 
 1. In the Azure portal, open the **Azure Cloud Shell** by clicking on the icon in the top right of the Azure Portal.
 
@@ -1239,9 +1239,9 @@ Kubernetes architecture.
 1. From the Cloud Shell pane, run the following to retrieve the credentials to access the AKS cluster:
 
     ```sh
-    RESOURCE_GROUP='rgname'
+    RESOURCE_GROUP='rg-tae-aks'
 
-    AKS_CLUSTER='aksclnamev'
+    AKS_CLUSTER='akstaecl'
 
     az aks get-credentials --resource-group $rgname--name $aksclname
     ``` 
