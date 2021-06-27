@@ -664,7 +664,7 @@ Test open Browser to IP Address the Virtual machines.
 
 1. Type **Scale set** in the search box. In the results, under **Marketplace**, select **Virtual machine scale sets**. Select **Create** on the **Virtual machine scale sets** page, which will open the **Create a virtual machine scale set** page.
 
-1. In the **Basics** tab, under **Project details**, make sure the correct subscription is selected and then choose to **Create new** resource group. Type **RG-VMSS** for the name and then select **OK**.
+1. In the **Basics** tab, under **Project details**, make sure the correct subscription is selected and then choose to **Create new** resource group. Type **RG-TAE-VMSS** for the name and then select **OK**.
 
 1. Type **VMSSTAEWEB** as the name for your scale set.
 
@@ -723,8 +723,8 @@ $customConfig = @{
 } 
 
     # Set VMSS variables
-$rgname = "rg-vmss"
-$vmssname = "vmssweb"
+$rgname = "rg-tae-vmss"
+$vmssname = "vmsstaeweb"
  
     # Get VMSS object 
 $vmss = Get-AzVmss -ResourceGroupName $rgname -VMScaleSetName $vmssname
