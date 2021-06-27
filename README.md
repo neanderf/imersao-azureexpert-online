@@ -535,7 +535,7 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
 
 1. On the **Review + Create** blade, click **Create**.
 
-1. Repeat a new Virtual Machine **VMWEB02**
+1. Repeat a new Virtual Machine **VMTAEWEB02**
 
 1. Check two Virtual machines create successful.
 
@@ -544,7 +544,7 @@ References: [Hub-spoke network topology](https://docs.microsoft.com/en-us/azure/
 **Note**
 Test open Browser to IP Address the Virtual machines.
 
-1. In the Azure portal, search and select **Load balancers** and, on the **Load balancers** blade, click **+ Add**.
+1. In the Azure portal, search and select **Load balancers** and, on the **Load balancers** blade, click **+ Create**.
 
 1. Create a load balancer with the following settings (leave others with their default values):
 
