@@ -1171,7 +1171,7 @@ In this task, you will swap the staging slot with the production slot
     | --- | --- |
     | Subscription | the name of the Azure subscription you are using in this lab |
     | Resource group | the name of a new resource group **RG-TA-Monitor** |
-    | Log Analytics Workspace | any unique name **lawtaemon |    
+    | Log Analytics Workspace | any unique name **lawtaemon** |    
     | Region | the name of the Azure region into which you deployed the virtual machine in the previous task |
 
     >**Note**: Wait for the deployment to complete. The deployment should take about 1 minute.
