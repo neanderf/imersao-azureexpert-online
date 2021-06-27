@@ -769,10 +769,10 @@ Update-AzVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet
     | --- | --- |
     | Time aggregation | **Maximum** |
     | Metric namespace | **Virtual Machine Host** |
-    | Metric name | **Percentage CPU** |
+    | Metric name | **Network In Total** |
     | VMName Operator | **=** |
     | Operator | **Greater than** |
-    | Metric threshold to trigger scale action | **1** |
+    | Metric threshold to trigger scale action | **10** |
     | Duration (in minutes) | **1** |
     | Time grain statistics | **Maximum** |
     | Operation | **Increase count by** |
@@ -787,7 +787,7 @@ Update-AzVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet
     | --- | --- |
     | Time aggregation | **Average** |
     | Metric namespace | **Virtual Machine Host** |
-    | Metric name | **Percentage CPU** |
+    | Metric name | **Network In Total** |
     | VMName Operator | **=** |
     | Operator | **Less than** |
     | Metric threshold to trigger scale action | **1** |
