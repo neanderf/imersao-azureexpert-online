@@ -879,8 +879,8 @@ Update-AzVmss -ResourceGroupName $rgname -Name $vmssname -VirtualMachineScaleSet
 
     | Setting | Value |
     | --- | ---|
-    | User name | any unique name (must not contain `@` character) **amdaz** |
-    | Password | any password that satisfies complexity requirements **Azur3Exp3rt*** |
+    | User name | any unique name (must not contain `@` character) |
+    | Password | any password that satisfies complexity requirements |
     
     >**Note:** The password must be at least eight characters long, with two of the following three elements: letters, numbers, and non-alphanumeric characters.
 
