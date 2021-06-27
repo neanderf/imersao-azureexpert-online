@@ -719,7 +719,7 @@ $customConfig = @{
   "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File VMSS-Install-IIS_v1.ps1" 
 } 
 
-    $ Install Web server
+    # Install Web server
 Install-WindowsFeature -name Web-Server -IncludeManagementTools
 
     # Set VMSS variables
