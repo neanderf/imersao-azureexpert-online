@@ -714,7 +714,7 @@ Test open Browser to IP Address the Virtual machines.
 
     >**Note**: If this is the first time you are starting **Cloud Shell** and you are presented with the **You have no storage mounted** message, select the subscription you are using in this lab, and click **Create storage**. 
 
-1. In Cloud Shell, start the code editor and create a file named **code Add-CustomExtension-VMSS.ps1**.
+1. In Cloud Shell, start the code editor and run the following command **code Add-CustomExtension-VMSS.ps1**.
 
 1. Add the following text to the script file:
 
@@ -1116,7 +1116,7 @@ In this task, you will swap the staging slot with the production slot
 
 1. On the **Security Settings** blade, note that **Soft Delete (For Azure Virtual Machines)** is **Enabled**.
 
-1. Close the **Security Settings** blade and, back on the **RSVNAME** Recovery Services vault blade, click **Overview**.
+1. Close the **Security Settings** blade and, back on the **RSV-TAE-Backup** Recovery Services vault blade, click **Overview**.
 
 1. On the **RSV-TAE-Backup** Recovery Services vault blade, click **+ Backup**.
 
@@ -1149,7 +1149,7 @@ In this task, you will swap the staging slot with the production slot
 
 1. Navigate back to the **RSV-TAE-Backup** Recovery Services vault blade, in the **Protected items** section, click **Backup items**, and then click the **Azure virtual machines** entry.
 
-1. On the **Backup Items (Azure Virtual Machine)** blade of **VMNAME**, review the values of the **Backup Pre-Check** and **Last Backup Status** entries, and click the **VMTAEHUB01** entry.
+1. On the **Backup Items (Azure Virtual Machine)** blade of **VMTAEHUB01**, review the values of the **Backup Pre-Check** and **Last Backup Status** entries, and click the **VMTAEHUB01** entry.
 
 1. On the **VMTAEHUB01** Backup Item blade, click **Backup now**, accept the default value in the **Retain Backup Till** drop-down list, and click **OK**.
 
